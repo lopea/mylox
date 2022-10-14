@@ -13,15 +13,16 @@
 #include <array>
 #include <algorithm>
 #include <exception>
+#include <stdexcept>
 #include "scanner.h"
 #include "expr.h"
 
-class ParserException : public std::exception
+class ParserException : public std::runtime_error
 {
 public:
-    ParserException(TokenPtr, const std::string&): std::exception(
-            ""
-            ){}
+    ParserException(TokenPtr, const std::string& msg): std::runtime_error(
+            msg
+    ){}
 };
 class Parser
 {
@@ -78,7 +79,7 @@ private:
     {
         std::array<TokenType, sizeof...(types)> array{types...};
 
-        if (std::ranges::any_of(array, [this](TokenType t)
+        if (std::any_of(array.begin(), array.end(), [this](TokenType t)
         { return Check(t); }))
         {
             Advance();
@@ -198,10 +199,6 @@ private:
         }
         throw ParserException(Peek(), "Expected Expression.");
     }
-
-
-
-
 };
 
 

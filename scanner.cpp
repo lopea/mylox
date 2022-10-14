@@ -121,6 +121,8 @@ void Scanner::ScanToken()
             }
             else
                 AddToken(TokenType::SLASH);
+
+            break;
         case ' ':
             [[fallthrough]];
         case '\t':

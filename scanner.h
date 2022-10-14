@@ -14,6 +14,8 @@
 #include <unordered_map>
 #include <iostream>
 #include <any>
+#include <memory>
+
 
 enum class TokenType
 {
@@ -148,7 +150,7 @@ private:
 
     /** variables **/
 
-    int m_start = 0, m_current = 0, m_line = 1;
+    unsigned long long m_start = 0, m_current = 0, m_line = 1;
 
     std::vector<char> m_data;
     std::vector<TokenPtr> m_tokens;
